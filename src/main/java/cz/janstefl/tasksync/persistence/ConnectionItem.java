@@ -2,15 +2,17 @@ package cz.janstefl.tasksync.persistence;
 
 import java.util.List;
 
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+
+import cz.janstefl.tasksync.persistence.ical.CalendarPropertiesItem;
 
 /**
  * Entity implementation class for Entity: ConnectionItem
@@ -22,15 +24,30 @@ import javax.persistence.OneToOne;
 })
 public class ConnectionItem {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @Id @GeneratedValue
   private int id;
   private long lastLocalUpdateTs;
   @OneToOne(fetch = FetchType.LAZY)
   private UserItem userItem;
   @OneToMany
   private List<SystemItem> systemItems;
+  @Embedded
+  private CalendarPropertiesItem calendarProperties;
 
+  public ConnectionItem() {
+    super();
+  }
+  
+  public ConnectionItem(int id, long lastLocalUpdateTs, UserItem userItem,
+      List<SystemItem> systemItems, CalendarPropertiesItem calendarProperties) {
+    super();
+    this.id = id;
+    this.lastLocalUpdateTs = lastLocalUpdateTs;
+    this.userItem = userItem;
+    this.systemItems = systemItems;
+    this.calendarProperties = calendarProperties;
+  }
+  
   public int getId() {
     return id;
   }
@@ -61,6 +78,14 @@ public class ConnectionItem {
 
   public void setSystemItem(List<SystemItem> systemItems) {
     this.systemItems = systemItems;
+  }
+
+  public CalendarPropertiesItem getCalendarProperties() {
+    return calendarProperties;
+  }
+
+  public void setCalendarProperties(CalendarPropertiesItem calendarProperties) {
+    this.calendarProperties = calendarProperties;
   }
 
   /**

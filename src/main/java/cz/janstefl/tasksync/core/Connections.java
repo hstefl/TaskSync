@@ -10,7 +10,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import cz.janstefl.tasksync.persistence.ConnectionItem;
-import cz.janstefl.tasksync.persistence.TaskItem;
+import cz.janstefl.tasksync.persistence.ical.ICalendarItem;
 
 /**
  * Session Bean implementation class Connections
@@ -43,7 +43,7 @@ public class Connections {
     return connections;
   }
 
-  public TaskItem createTask(TaskItem task) {
+  public ICalendarItem createTask(ICalendarItem task) {
     em.persist(task);
     return task;
   }
@@ -53,7 +53,7 @@ public class Connections {
     return connection;
   }
 
-  public TaskItem markTaskForDelete(TaskItem task) {
+  public ICalendarItem markTaskForDelete(ICalendarItem task) {
     return task;
   }
 
