@@ -17,6 +17,17 @@ public class UserItem {
   private int id;
   private String email;
 
+  public UserItem() {
+    super();
+    // TODO Auto-generated constructor stub
+  }
+  
+  public UserItem(int id, String email) {
+    super();
+    this.id = id;
+    this.email = email;
+  }
+  
   public int getId() {
     return id;
   }
