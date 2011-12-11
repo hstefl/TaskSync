@@ -12,8 +12,7 @@ import javax.persistence.Id;
 @Entity
 public class UserItem {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @Id @GeneratedValue
   private int id;
   private String email;
 
