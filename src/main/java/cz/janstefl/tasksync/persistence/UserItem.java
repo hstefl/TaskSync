@@ -20,18 +20,13 @@ public class UserItem {
     // TODO Auto-generated constructor stub
   }
   
-  public UserItem(int id, String email) {
+  public UserItem(String email) {
     super();
-    this.id = id;
     this.email = email;
   }
   
   public int getId() {
     return id;
-  }
-
-  public void setId(int id) {
-    this.id = id;
   }
 
   public String getEmail() {

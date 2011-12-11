@@ -2,6 +2,7 @@ package cz.janstefl.tasksync.persistence;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,7 +13,6 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
-import cz.janstefl.tasksync.persistence.UserItem;
 import cz.janstefl.tasksync.persistence.ical.CalendarPropertiesItem;
 
 /**
@@ -20,17 +20,17 @@ import cz.janstefl.tasksync.persistence.ical.CalendarPropertiesItem;
  * 
  */
 @Entity
-@NamedQueries({
-  @NamedQuery(name = "loadAllConnections", query="select c from ConnectionItem c")
-})
+@NamedQueries({ @NamedQuery(name = "loadAllConnections", query = "select c from ConnectionItem c") })
 public class ConnectionItem {
 
-  @Id @GeneratedValue
+  @Id
+  @GeneratedValue
   private int id;
   private long lastLocalUpdateTs;
-  @OneToOne(fetch = FetchType.LAZY)
+  @OneToOne(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST,
+      CascadeType.REMOVE })
   private UserItem userItem;
-  @OneToMany
+  @OneToMany(cascade = { CascadeType.PERSIST, CascadeType.REMOVE })
   private List<SystemItem> systemItems;
   @Embedded
   private CalendarPropertiesItem calendarProperties;
@@ -38,23 +38,18 @@ public class ConnectionItem {
   public ConnectionItem() {
     super();
   }
-  
-  public ConnectionItem(int id, long lastLocalUpdateTs, UserItem userItem,
+
+  public ConnectionItem(long lastLocalUpdateTs, UserItem userItem,
       List<SystemItem> systemItems, CalendarPropertiesItem calendarProperties) {
     super();
-    this.id = id;
     this.lastLocalUpdateTs = lastLocalUpdateTs;
     this.userItem = userItem;
     this.systemItems = systemItems;
     this.calendarProperties = calendarProperties;
   }
-  
+
   public int getId() {
     return id;
-  }
-
-  public void setId(int id) {
-    this.id = id;
   }
 
   public long getLastLocalUpdateTs() {
@@ -94,15 +89,15 @@ public class ConnectionItem {
    */
   public boolean isInitSync() {
     boolean res = false;
-    
+
     for (SystemItem sys : systemItems) {
       if (sys.getProperties().isInitSync()) {
         res = true;
         break;
       }
     }
-    
+
     return res;
   }
-  
+
 }

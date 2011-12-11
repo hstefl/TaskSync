@@ -46,6 +46,12 @@ public class Connections {
     em.persist(connection);
     return connection;
   }
+  
+  public void createConnection(List<ConnectionItem> connections) {
+    for (ConnectionItem connection : connections) {
+      createConnection(connection);
+    }
+  }
 
   public ICalendarItem markTaskForDelete(ICalendarItem task) {
     return task;

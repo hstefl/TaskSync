@@ -21,10 +21,6 @@ public class SystemPropertiesItem extends SystemProperties {
     return id;
   }
 
-  public void setId(int id) {
-    this.id = id;
-  }
-
   public String getSystemClassName() {
     return systemClassName;
   }
