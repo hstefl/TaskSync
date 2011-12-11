@@ -1,7 +1,6 @@
 package cz.janstefl.tasksync.core;
 
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Queue;
 
 import javax.annotation.PostConstruct;
@@ -12,11 +11,9 @@ import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 
 import cz.janstefl.tasksync.persistence.ConnectionItem;
 import cz.janstefl.tasksync.persistence.SystemItem;
-import cz.janstefl.tasksync.persistence.UserItem;
 
 /**
  * Session Bean implementation class TaskSync
@@ -52,9 +49,9 @@ public class TaskSync {
         // because some system demands synchronization "at once".
         // For example Toodledo requires one sync per hour.
         
-        if ((sys.isPullEnabled() && sys.getNextPull() <= now && !isSystemItemReadyToPush(sys) 
+        if ((sys.getProperties().isPullEnabled() && sys.getProperties().getNextPull() <= now && !isSystemItemReadyToPush(sys) 
              && systems.tasksChanged(sys)) 
-            || sys.isInitSync()) {
+            || sys.getProperties().isInitSync()) {
           pullQueue.add(sys);
         }
       }
@@ -66,7 +63,7 @@ public class TaskSync {
     long now = System.currentTimeMillis() / 1000L;
     for (ConnectionItem con : connections.get()) {
       for (SystemItem sys : con.getSystemItems()) {
-        if ((sys.getNextPush() <= now || sys.isManualRequest()) && !con.isInitSync()) {
+        if ((sys.getProperties().getNextPush() <= now || sys.getProperties().isManualRequest()) && !con.isInitSync()) {
           pushQueue.add(sys);
        }
       }

@@ -12,6 +12,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import cz.janstefl.tasksync.persistence.UserItem;
 import cz.janstefl.tasksync.persistence.ical.CalendarPropertiesItem;
 
 /**
@@ -95,7 +96,7 @@ public class ConnectionItem {
     boolean res = false;
     
     for (SystemItem sys : systemItems) {
-      if (sys.isInitSync()) {
+      if (sys.getProperties().isInitSync()) {
         res = true;
         break;
       }

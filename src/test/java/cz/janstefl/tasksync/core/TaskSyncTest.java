@@ -15,6 +15,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import cz.janstefl.tasksync.persistence.UserItem;
+import cz.janstefl.tasksync.persistence.SystemItem;
 
 public class TaskSyncTest {
 
@@ -40,7 +41,13 @@ public class TaskSyncTest {
   }
 
   @Test
-  public void betterTest() throws Exception {
+  public void pull() throws Exception {
+    TaskSync ts = (TaskSync) ctx
+        .lookup("java:global/classes/TaskSync!cz.janstefl.tasksync.core.TaskSync");
+  }
+  
+  @Test
+  public void push() throws Exception {
     TaskSync ts = (TaskSync) ctx
         .lookup("java:global/classes/TaskSync!cz.janstefl.tasksync.core.TaskSync");
   }
@@ -53,15 +60,32 @@ public class TaskSyncTest {
     users.add(new UserItem(4, "jakekoliv@jmeno.cz"));
     users.add(new UserItem(5, "arjen@lucassen.net"));
 
-    TaskSync ts = (TaskSync) ctx
-        .lookup("java:global/classes/TaskSync!cz.janstefl.tasksync.core.TaskSync");
-
-    ts.createUser(users);
+    Users usersBean = (Users) ctx
+        .lookup("java:global/classes/Users!cz.janstefl.tasksync.core.Users");
+   
+    usersBean.createUser(users);
   }
 
   private static void generateSystems() throws NamingException {
     Systems systems = (Systems) ctx
         .lookup("java:global/classes/Systems!cz.janstefl.tasksync.core.Systems");
+    
+//    List<SystemItem> systems = new ArrayList<SystemItem>();
+//    systems.add(new SystemItem(
+//        int systemClassName, 
+//        long lastLocalUpdate,
+//        long lastRemoteUpdate, 
+//        int interval, 
+//        long nextPull, 
+//        int maxTasksPerPull,
+//        long nextPush, 
+//        int maxTasksPerPush, 
+//        boolean manualRequest,
+//        boolean initSync, 
+//        boolean pullEnabled
+//    ));
+    
+    
   }
 
   private static void generateConnections() throws NamingException {

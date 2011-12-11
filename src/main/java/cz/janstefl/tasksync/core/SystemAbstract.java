@@ -6,19 +6,19 @@ package cz.janstefl.tasksync.core;
 import cz.janstefl.tasksync.persistence.SystemItem;
 
 /**
- * @author hstefl
  * TODO null object
  * 
- * Childrens must:
- * 1. Define private constructor
+ * Childrens must: 
+ *   1. Define private constructor
  */
 public abstract class SystemAbstract {
-  
+
+  protected SystemProperties properties = new SystemProperties();
+
   abstract public void pull(SystemItem system);
-  
+
   abstract public void push(SystemItem system);
-  
-  
+
   /**
    * System Factory
    */
@@ -26,7 +26,7 @@ public abstract class SystemAbstract {
     SystemAbstract object = null;
     try {
       Class<?> c = Class.forName(SystemClassName);
-      object = (SystemAbstract)c.newInstance();
+      object = (SystemAbstract) c.newInstance();
     } catch (InstantiationException e) {
       e.printStackTrace();
     } catch (IllegalAccessException e) {
@@ -37,4 +37,13 @@ public abstract class SystemAbstract {
 
     return object;
   }
+
+  public SystemProperties getProperties() {
+    return properties;
+  }
+
+  public void setProperties(SystemProperties properties) {
+    this.properties = properties;
+  }
+
 }

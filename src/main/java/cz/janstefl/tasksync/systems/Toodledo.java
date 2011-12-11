@@ -6,7 +6,8 @@ import cz.janstefl.tasksync.persistence.SystemItem;
 public class Toodledo extends SystemAbstract {
 
   private Toodledo() {
-    
+    this.properties.setPullEnabled(false);
+    this.properties.setMaxTasksPerPush(50);
   }
 
   @Override
