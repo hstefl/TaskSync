@@ -87,28 +87,4 @@ public class TaskSync {
     return pushQueue.contains(system);
   }
 
-  /**
-   * Persists user. 
-   * TODO: Refactor into class Users
-   * 
-   * @param user
-   * @return
-   */
-  public UserItem createUser(UserItem user) {
-    em.persist(user);
-    return user;
-  }
-
-  /**
-   * Persists users.
-   * TODO: Refactor into class Users
-   * 
-   * @param user
-   * @return
-   */
-  public void createUser(List<UserItem> users) {
-    for (UserItem user : users) {
-      createUser(user);
-    }
-  }
 }

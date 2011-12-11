@@ -17,12 +17,6 @@ public class Systems {
   @PersistenceContext(unitName = "TaskSync")
   private EntityManager em;
 
-  /**
-   * Default constructor.
-   */
-  public Systems() {
-    // TODO Auto-generated constructor stub
-  }
 
   public SystemItem createSystemItem(SystemItem system) {
     em.persist(system);

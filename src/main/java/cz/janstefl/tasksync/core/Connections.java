@@ -24,12 +24,6 @@ public class Connections {
 
   private List<ConnectionItem> connections = new Vector<ConnectionItem>();
 
-  /**
-   * Default constructor.
-   */
-  public Connections() {
-    // TODO Auto-generated constructor stub
-  }
 
   public void init() {
     Query query = em.createNamedQuery("loadAllConnections");
