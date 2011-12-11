@@ -9,8 +9,6 @@ import javax.ejb.LocalBean;
 import javax.ejb.Schedule;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 
 import cz.janstefl.tasksync.persistence.ConnectionItem;
 import cz.janstefl.tasksync.persistence.SystemItem;
@@ -23,8 +21,6 @@ import cz.janstefl.tasksync.persistence.SystemItem;
 @LocalBean
 public class TaskSync {
 
-  @PersistenceContext(unitName = "TaskSync")
-  private EntityManager em;
   @EJB
   private Systems systems;
   @EJB
