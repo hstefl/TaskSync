@@ -12,8 +12,7 @@ import javax.persistence.Id;
 @Entity
 public class SystemItem {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @Id @GeneratedValue
   private int id;
   private int systemClassName;
   private long lastLocalUpdate;
