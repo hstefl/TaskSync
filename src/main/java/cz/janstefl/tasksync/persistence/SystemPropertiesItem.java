@@ -40,5 +40,22 @@ public class SystemPropertiesItem extends SystemProperties {
   public void setConnection(ConnectionItem connection) {
     this.connection = connection;
   }
+  
+  public void set(SystemProperties systemProperties) {
+    initSync = systemProperties.isInitSync();
+    interval = systemProperties.getInterval();
+    lastLocalUpdate = systemProperties.getLastLocalUpdate();
+    lastRemoteUpdate = systemProperties.getLastRemoteUpdate();
+    manualRequest = systemProperties.isManualRequest();
+    maxTasksPerPull = systemProperties.getMaxTasksPerPull();
+    maxTasksPerPush = systemProperties.getMaxTasksPerPush();
+    nextPull = systemProperties.getNextPull();
+    nextPull = systemProperties.getNextPush();
+    pullEnabled = systemProperties.isPullEnabled();
+  }
 
+  @Override
+  public final Object clone() throws CloneNotSupportedException {
+    throw new CloneNotSupportedException();
+  }
 }

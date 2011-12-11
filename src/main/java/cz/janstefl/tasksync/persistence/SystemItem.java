@@ -4,6 +4,7 @@ import javax.persistence.Embedded;
 import javax.persistence.Entity;
 
 import cz.janstefl.tasksync.core.SystemAbstract;
+import cz.janstefl.tasksync.core.SystemProperties;
 
 /**
  * Entity implementation class for Entity: SystemItem
@@ -13,7 +14,7 @@ import cz.janstefl.tasksync.core.SystemAbstract;
 public class SystemItem {
 
   @Embedded
-  SystemPropertiesItem properties;
+  SystemPropertiesItem properties = new SystemPropertiesItem();
 
   public SystemItem() {
   }
@@ -21,12 +22,19 @@ public class SystemItem {
   public SystemItem(String systemClassName) {
     SystemAbstract sys = (SystemAbstract) SystemAbstract
         .factory(systemClassName);
-    
+
     // TODO revise this (clone)
-    properties = (SystemPropertiesItem)(sys.getProperties().clone());
+    try {
+      // Load default properties from system implementation (For instance
+      // Toodledo).
+      properties.set((SystemProperties) (sys.getProperties().clone()));
+    } catch (CloneNotSupportedException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
     properties.setSystemClassName(systemClassName);
   }
-  
+
   public SystemItem(String systemClassName, ConnectionItem connection) {
     this(systemClassName);
     this.properties.setConnection(connection);
@@ -43,7 +51,7 @@ public class SystemItem {
   public ConnectionItem getConnectionItem() {
     return properties.getConnection();
   }
-  
+
   public void setConnection(ConnectionItem connection) {
     this.properties.setConnection(connection);
   }

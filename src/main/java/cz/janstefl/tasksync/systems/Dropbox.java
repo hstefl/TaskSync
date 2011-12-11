@@ -5,7 +5,7 @@ import cz.janstefl.tasksync.persistence.SystemItem;
 
 public class Dropbox extends SystemAbstract {
 
-  private Dropbox() {
+  public Dropbox() {
     
   }
 

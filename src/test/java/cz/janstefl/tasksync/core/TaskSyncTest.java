@@ -63,29 +63,19 @@ public class TaskSyncTest {
     Users usersBean = (Users) ctx
         .lookup("java:global/classes/Users!cz.janstefl.tasksync.core.Users");
    
-    usersBean.createUser(users);
+    usersBean.createUserItem(users);
   }
 
   private static void generateSystems() throws NamingException {
-    Systems systems = (Systems) ctx
+    Systems systemsBean = (Systems) ctx
         .lookup("java:global/classes/Systems!cz.janstefl.tasksync.core.Systems");
     
-//    List<SystemItem> systems = new ArrayList<SystemItem>();
-//    systems.add(new SystemItem(
-//        int systemClassName, 
-//        long lastLocalUpdate,
-//        long lastRemoteUpdate, 
-//        int interval, 
-//        long nextPull, 
-//        int maxTasksPerPull,
-//        long nextPush, 
-//        int maxTasksPerPush, 
-//        boolean manualRequest,
-//        boolean initSync, 
-//        boolean pullEnabled
-//    ));
+    List<SystemItem> systems = new ArrayList<SystemItem>();
+    systems.add(new SystemItem("cz.janstefl.tasksync.systems.Toodledo")); // ID = 1
+    systems.add(new SystemItem("cz.janstefl.tasksync.systems.Dropbox")); // ID = 2
+    systems.add(new SystemItem("cz.janstefl.tasksync.systems.Toodledo")); // ID = 3
     
-    
+    systemsBean.createSystemItem(systems);
   }
 
   private static void generateConnections() throws NamingException {

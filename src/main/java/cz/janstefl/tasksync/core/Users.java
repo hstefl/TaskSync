@@ -25,7 +25,7 @@ public class Users {
    * @param user
    * @return
    */
-  public UserItem createUser(UserItem user) {
+  public UserItem createUserItem(UserItem user) {
     em.persist(user);
     return user;
   }
@@ -36,9 +36,9 @@ public class Users {
    * @param user
    * @return
    */
-  public void createUser(List<UserItem> users) {
+  public void createUserItem(List<UserItem> users) {
     for (UserItem user : users) {
-      createUser(user);
+      createUserItem(user);
     }
   }
 

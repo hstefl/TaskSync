@@ -7,9 +7,6 @@ import cz.janstefl.tasksync.persistence.SystemItem;
 
 /**
  * TODO null object
- * 
- * Childrens must: 
- *   1. Define private constructor
  */
 public abstract class SystemAbstract {
 

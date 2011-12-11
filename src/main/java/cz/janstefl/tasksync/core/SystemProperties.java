@@ -4,16 +4,16 @@ public class SystemProperties implements Cloneable {
   private static final int UNLIMITED_TASKS_PER_PUSH = 0;
   private static final int UNLIMITED_TASKS_PER_PULL = 0;
   
-  private long lastLocalUpdate = 0;
-  private long lastRemoteUpdate = 0;
-  private int interval = 3600;
-  private long nextPull = interval / 2;
-  private long nextPush = interval;
-  private boolean manualRequest = false;
-  private int maxTasksPerPush = UNLIMITED_TASKS_PER_PUSH;
-  private boolean pullEnabled = false;
-  private int maxTasksPerPull = UNLIMITED_TASKS_PER_PULL;
-  private boolean initSync = true;
+  protected long lastLocalUpdate = 0;
+  protected long lastRemoteUpdate = 0;
+  protected int interval = 3600;
+  protected long nextPull = interval / 2;
+  protected long nextPush = interval;
+  protected boolean manualRequest = false;
+  protected int maxTasksPerPush = UNLIMITED_TASKS_PER_PUSH;
+  protected boolean pullEnabled = false;
+  protected int maxTasksPerPull = UNLIMITED_TASKS_PER_PULL;
+  protected boolean initSync = true;
 
   public SystemProperties() {
   }
@@ -115,7 +115,7 @@ public class SystemProperties implements Cloneable {
   }
   
   @Override
-  public Object clone() {
+  public Object clone() throws CloneNotSupportedException {
     SystemProperties properties = new SystemProperties();
     properties.setInitSync(this.initSync);
     properties.setInterval(this.interval);
